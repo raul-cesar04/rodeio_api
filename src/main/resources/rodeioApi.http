@@ -1,0 +1,36 @@
+## COMPETIDORES
+### CREATE
+POST localhost:8080/v1/competidor
+Content-Type: application/json
+
+{
+  "nome": "Anderson de Oliveira",
+  "idade": 38,
+  "cidadeNatal": {
+    "cidade": "Mundo Novo",
+    "estado": "MS"
+  }
+}
+
+### LIST
+GET localhost:8080/v1/competidor
+
+### PROCURA
+GET localhost:8080/v1/competidor/203
+
+### ATUALIZA
+PUT localhost:8080/v1/competidor/152
+Content-Type: application/json
+
+{
+  "nome": "Rafael Wermond",
+  "idade": 23,
+  "cidadeNatal": {
+    "cidade": "Tangará da Serra",
+    "estado": "MT"
+  }
+}
+
+
+### DELETA
+DELETE localhost:8080/v1/competidor/203
