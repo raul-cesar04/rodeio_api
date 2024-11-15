@@ -88,8 +88,8 @@ public class CompetidorController {
 
     private EntityModel<CompetidorModel> competidorModelToEntityModel(CompetidorModel competidorModel){
         Pageable pageable = PageRequest.of(0, 10);
-        EntityModel<CompetidorModel> competidor = competidorRepresentationModelAssembler.toModel(competidorModel)
+        EntityModel<CompetidorModel> competidorModelEntityModel = competidorRepresentationModelAssembler.toModel(competidorModel)
                 .add(linkTo(methodOn(CompetidorController.class).listCompetidores(pageable)).withRel("competidores"));
-        return competidor;
+        return competidorModelEntityModel;
     }
 }

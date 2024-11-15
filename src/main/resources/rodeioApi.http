@@ -32,5 +32,34 @@ Content-Type: application/json
 }
 
 
-### DELETA
+### DELETE
 DELETE localhost:8080/v1/competidor/203
+
+## TROPEIROS
+
+### LIST
+GET localhost:8080/v1/tropeiro
+
+### CREATE
+POST localhost:8080/v1/tropeiro
+Content-Type: application/json
+
+{
+  "nome": "J.T.S de Tanabi",
+  "sigla": "JTS"
+}
+
+### BUSCA
+GET localhost:8080/v1/tropeiro/52
+
+### ATUALIZA
+PUT localhost:8080/v1/tropeiro/2
+Content-Type: application/json
+
+{
+  "nome": "Neto Oger BRAHMA",
+  "sigla": "NO"
+}
+
+### DELETE
+DELETE localhost:8080/v1/tropeiro/52

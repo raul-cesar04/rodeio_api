@@ -22,6 +22,8 @@ public class RootController {
         rootResource.add(linkTo(methodOn(RootController.class).root()).withSelfRel());
         rootResource.add(linkTo(methodOn(CompetidorController.class).listCompetidores(pageable)).withRel("competidores"));
 
+        rootResource.add(linkTo(methodOn(TropeiroController.class).listTropeiros(pageable)).withRel("tropeiros"));
+
         return rootResource;
     }
 }
