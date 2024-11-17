@@ -25,7 +25,7 @@ public class CompetidorModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 64)
     private String nome;
 
     @Column(nullable = false)

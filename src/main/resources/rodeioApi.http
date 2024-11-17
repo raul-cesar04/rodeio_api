@@ -45,12 +45,17 @@ POST localhost:8080/v1/tropeiro
 Content-Type: application/json
 
 {
-  "nome": "J.T.S de Tanabi",
-  "sigla": "JTS"
+  "nome": "José Thiago",
+  "sigla": "JTP",
+  "boiada": [
+    {
+      "nome": "Despacho"
+    }
+  ]
 }
 
 ### BUSCA
-GET localhost:8080/v1/tropeiro/52
+GET localhost:8080/v1/tropeiro/152
 
 ### ATUALIZA
 PUT localhost:8080/v1/tropeiro/2
@@ -62,4 +67,4 @@ Content-Type: application/json
 }
 
 ### DELETE
-DELETE localhost:8080/v1/tropeiro/52
+DELETE localhost:8080/v1/tropeiro/203

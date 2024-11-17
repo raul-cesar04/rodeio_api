@@ -1,5 +1,6 @@
 package br.ufms.cpcx.rodeio_api.services;
 
+import br.ufms.cpcx.rodeio_api.models.AnimalModel;
 import br.ufms.cpcx.rodeio_api.models.TropeiroModel;
 import br.ufms.cpcx.rodeio_api.repositories.TropeiroRepository;
 import org.springframework.data.domain.Page;
@@ -12,14 +13,23 @@ import java.util.Optional;
 @Service
 public class TropeiroService {
     private final TropeiroRepository tropeiroRepository;
+    private final AnimalService animalService;
 
-    protected TropeiroService(TropeiroRepository tropeiroRepository) {
+    protected TropeiroService(TropeiroRepository tropeiroRepository, AnimalService animalService) {
         this.tropeiroRepository = tropeiroRepository;
+        this.animalService = animalService;
     }
 
     @Transactional
     protected TropeiroModel save(TropeiroModel tropeiroModel){
-        return tropeiroRepository.save(tropeiroModel);
+        TropeiroModel savedTropeiroModel = tropeiroRepository.save(tropeiroModel);
+
+        for(AnimalModel animalModel:tropeiroModel.getBoiada()){
+            animalModel.setProprietario(savedTropeiroModel);
+            animalService.save(animalModel);
+        }
+
+        return savedTropeiroModel;
     }
 
     @Transactional

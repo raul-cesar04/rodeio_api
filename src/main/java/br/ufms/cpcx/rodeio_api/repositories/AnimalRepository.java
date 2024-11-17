@@ -1,0 +1,8 @@
+package br.ufms.cpcx.rodeio_api.repositories;
+
+import br.ufms.cpcx.rodeio_api.models.AnimalModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AnimalRepository extends JpaRepository<AnimalModel, Long> {
+
+}

@@ -1,5 +1,6 @@
 package br.ufms.cpcx.rodeio_api.services;
 
+import br.ufms.cpcx.rodeio_api.models.AnimalModel;
 import br.ufms.cpcx.rodeio_api.models.CompetidorModel;
 import br.ufms.cpcx.rodeio_api.models.TropeiroModel;
 import org.springframework.data.domain.Page;
@@ -12,9 +13,13 @@ import java.util.Optional;
 public class RodeioApiServiceFacade {
     private final CompetidorService competidorService;
     private final TropeiroService tropeiroService;
-    public RodeioApiServiceFacade(CompetidorService ccompetidorService, TropeiroService tropeiroService) {
+
+    private final AnimalService animalService;
+
+    public RodeioApiServiceFacade(CompetidorService ccompetidorService, TropeiroService tropeiroService, AnimalService animalService) {
         this.competidorService = ccompetidorService;
         this.tropeiroService = tropeiroService;
+        this.animalService = animalService;
     }
 
     /** COMPETIDORES **/
@@ -54,5 +59,23 @@ public class RodeioApiServiceFacade {
 
     public boolean tropeiroExistsByNameAndSigla(String nome, String sigla){
         return this.tropeiroService.existsByNameAndSigla(nome, sigla);
+    }
+
+
+    /** ANIMAL **/
+    public AnimalModel createAnimal(AnimalModel animalModel){
+        return this.animalService.save(animalModel);
+    }
+
+    public Optional<AnimalModel> getAnimal(Long id){
+        return this.animalService.findById(id);
+    }
+
+    public Page<AnimalModel> getAnimais(Pageable pageable){
+        return this.animalService.findAll(pageable);
+    }
+
+    public void deleteAnimal(AnimalModel animalModel){
+        this.animalService.delete(animalModel);
     }
 }

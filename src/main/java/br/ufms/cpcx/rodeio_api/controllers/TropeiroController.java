@@ -1,7 +1,9 @@
 package br.ufms.cpcx.rodeio_api.controllers;
 
 
+import br.ufms.cpcx.rodeio_api.dtos.AnimalDTO;
 import br.ufms.cpcx.rodeio_api.dtos.TropeiroDTO;
+import br.ufms.cpcx.rodeio_api.models.AnimalModel;
 import br.ufms.cpcx.rodeio_api.models.TropeiroModel;
 import br.ufms.cpcx.rodeio_api.models.TropeiroRepresentationModelAssembler;
 import br.ufms.cpcx.rodeio_api.services.RodeioApiServiceFacade;
@@ -14,10 +16,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -42,12 +46,26 @@ public class TropeiroController {
 
     @PostMapping()
     public ResponseEntity<EntityModel<TropeiroModel>> createTropeiro(@RequestBody @Valid TropeiroDTO tropeiroDTO) {
+        if(CollectionUtils.isEmpty(tropeiroDTO.getBoiada())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Para registrar um tropeiro pelo menos um animal deve ser informado no plantel.");
+        }
+
         if(this.rodeioApiServiceFacade.tropeiroExistsByNameAndSigla(tropeiroDTO.getNome(), tropeiroDTO.getSigla())){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Tropeiro já cadastrado com esse nome e sigla.");
         }
 
         TropeiroModel tropeiroModel = new TropeiroModel();
         BeanUtils.copyProperties(tropeiroDTO, tropeiroModel);
+
+        tropeiroModel.setBoiada(new ArrayList<>());
+
+        for(AnimalDTO animalDTO:tropeiroDTO.getBoiada()){
+            AnimalModel animalModel = new AnimalModel();
+            animalModel.setProprietario(tropeiroModel);
+            BeanUtils.copyProperties(animalDTO, animalModel);
+            tropeiroModel.getBoiada().add(animalModel);
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(tropeiroModelToEntityModel(rodeioApiServiceFacade.createTropeiro(tropeiroModel)));
     }
 
