@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 public class CompetidorDTO {
@@ -20,4 +22,6 @@ public class CompetidorDTO {
     @NotNull
     @Valid
     private LocalizacaoDTO cidadeNatal;
+
+    private List<EventoCompetidorInscricaoDTO> eventos;
 }

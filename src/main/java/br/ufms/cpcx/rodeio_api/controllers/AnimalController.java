@@ -38,7 +38,7 @@ public class AnimalController {
 
     @GetMapping()
     public ResponseEntity<Page<EntityModel<AnimalModel>>> listAnimals(Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.getAnimais(pageable).map(animal->animalRepresentationModelAssembler.toModel(animal)));
+        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.getAnimais(pageable).map(this::animalModelToEntityModel));
     }
 
     @GetMapping("/{id}")

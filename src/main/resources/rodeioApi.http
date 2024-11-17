@@ -101,3 +101,38 @@ Content-Type: application/json
 
 ### DELETE
 DELETE localhost:8080/v1/animal/204
+
+## EVENTOS
+
+### LISTAR
+GET localhost:8080/v1/evento
+
+### BUSCAR
+GET localhost:8080/v1/evento/1
+
+### CRIAR
+POST localhost:8080/v1/evento
+Content-Type: application/json
+
+{
+  "titulo": "Fepeina 2024",
+  "localizacao": {
+    "cidade": "Douradina",
+    "estado": "PR"
+  }
+}
+
+### Atualiza
+PUT localhost:8080/v1/evento/52
+Content-Type: application/json
+
+{
+  "titulo": "FEPEINA 2024 - 50 anos",
+  "localizacao": {
+    "cidade": "Douradina",
+    "estado": "PR"
+  }
+}
+
+### Deleta
+DELETE localhost:8080/v1/evento/52

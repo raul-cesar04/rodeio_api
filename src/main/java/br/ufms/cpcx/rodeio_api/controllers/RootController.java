@@ -27,6 +27,7 @@ public class RootController {
 
         rootResource.add(linkTo(methodOn(AnimalController.class).listAnimals(pageable)).withRel("animais"));
 
+        rootResource.add(linkTo(methodOn(EventoController.class).listEventos(pageable)).withRel("eventos"));
         return rootResource;
     }
 }
