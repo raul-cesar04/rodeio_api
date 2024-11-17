@@ -1,5 +1,6 @@
 package br.ufms.cpcx.rodeio_api.dtos;
 
+import br.ufms.cpcx.rodeio_api.models.AnimalLadoBreteEnum;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -14,4 +15,5 @@ public class AnimalDTO {
     private String nome;
 
     private TropeiroDTO proprietario;
+    private AnimalLadoBreteEnum ladoBrete;
 }

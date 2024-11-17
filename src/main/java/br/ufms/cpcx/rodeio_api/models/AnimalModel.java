@@ -27,6 +27,10 @@ public class AnimalModel implements Serializable {
     @Column(nullable = false, length = 64)
     private String nome;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 6)
+    private AnimalLadoBreteEnum ladoBrete;
+
     @JsonIgnoreProperties("boiada")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tropeiro", foreignKey = @ForeignKey(name = "FK_PROPRIETARIO"), nullable = false)

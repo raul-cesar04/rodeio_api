@@ -57,4 +57,33 @@ public class AnimalController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(rodeioApiServiceFacade.createAnimal(animalModel));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AnimalModel> updateAnimal(@PathVariable Long id, @RequestBody @Valid AnimalDTO animalDTO){
+        Optional<AnimalModel> animalModelOptional = rodeioApiServiceFacade.getAnimal(id);
+        if(animalModelOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal "+id+" não encontrado.");
+        }
+
+        AnimalModel animalModel = new AnimalModel();
+
+        BeanUtils.copyProperties(animalDTO, animalModel);
+        animalModel.setId(animalModelOptional.get().getId());
+        animalModel.setProprietario(animalModelOptional.get().getProprietario());
+
+        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.createAnimal(animalModel));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAnimal(@PathVariable Long id){
+        Optional<AnimalModel> animalOptional = rodeioApiServiceFacade.getAnimal(id);
+        if(animalOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal "+id+" não encontrado.");
+        }
+
+        rodeioApiServiceFacade.deleteAnimal(animalOptional.get());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }
+

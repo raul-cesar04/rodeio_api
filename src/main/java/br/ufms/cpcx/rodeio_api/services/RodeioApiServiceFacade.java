@@ -76,6 +76,12 @@ public class RodeioApiServiceFacade {
     }
 
     public void deleteAnimal(AnimalModel animalModel){
+        TropeiroModel tropeiroModel = animalModel.getProprietario();
+
+        if(tropeiroModel.getBoiada().size() < 2){
+            this.tropeiroService.delete(tropeiroModel);
+            return;
+        }
         this.animalService.delete(animalModel);
     }
 

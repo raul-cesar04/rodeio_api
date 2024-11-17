@@ -45,11 +45,12 @@ POST localhost:8080/v1/tropeiro
 Content-Type: application/json
 
 {
-  "nome": "Trem Que Pula",
-  "sigla": "TQP",
+  "nome": "São Salomão",
+  "sigla": "SSO",
   "boiada": [
     {
-      "nome": "Bandoleiro"
+      "nome": "Tinga",
+      "ladoBrete": "ERRADO"
     }
   ]
 }
@@ -82,8 +83,21 @@ POST localhost:8080/v1/animal
 Content-Type: application/json
 
 {
-  "nome": "Resgate",
+  "nome": "Taça",
+  "ladoBrete": "ERRADO",
   "proprietario": {
-    "id": 252
+    "id": 202
   }
 }
+
+### Atualiza
+PUT localhost:8080/v1/animal/154
+Content-Type: application/json
+
+{
+  "nome": "Bandoleiro",
+  "ladoBrete": "CERTO"
+}
+
+### DELETE
+DELETE localhost:8080/v1/animal/204
