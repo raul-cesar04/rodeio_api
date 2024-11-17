@@ -78,4 +78,8 @@ public class RodeioApiServiceFacade {
     public void deleteAnimal(AnimalModel animalModel){
         this.animalService.delete(animalModel);
     }
+
+    public boolean animalExistsByNomeAndProprietario(String nome, TropeiroModel tropeiroModel){
+        return this.animalService.existsByNomeAndProprietario(nome, tropeiroModel);
+    }
 }

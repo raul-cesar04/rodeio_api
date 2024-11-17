@@ -20,9 +20,12 @@ public class RootController {
         var pageable = PageRequest.of(0, 10);
 
         rootResource.add(linkTo(methodOn(RootController.class).root()).withSelfRel());
+
         rootResource.add(linkTo(methodOn(CompetidorController.class).listCompetidores(pageable)).withRel("competidores"));
 
         rootResource.add(linkTo(methodOn(TropeiroController.class).listTropeiros(pageable)).withRel("tropeiros"));
+
+        rootResource.add(linkTo(methodOn(AnimalController.class).listAnimals(pageable)).withRel("animais"));
 
         return rootResource;
     }

@@ -13,6 +13,5 @@ public class AnimalDTO {
     @Size(max = 64)
     private String nome;
 
-    @Valid
     private TropeiroDTO proprietario;
 }

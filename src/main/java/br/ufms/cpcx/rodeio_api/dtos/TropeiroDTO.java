@@ -10,6 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 public class TropeiroDTO {
+    private Long id;
+
     @NotBlank
     @Size(max = 64)
     private String nome;

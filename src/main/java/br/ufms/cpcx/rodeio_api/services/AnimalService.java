@@ -1,6 +1,7 @@
 package br.ufms.cpcx.rodeio_api.services;
 
 import br.ufms.cpcx.rodeio_api.models.AnimalModel;
+import br.ufms.cpcx.rodeio_api.models.TropeiroModel;
 import br.ufms.cpcx.rodeio_api.repositories.AnimalRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,5 +33,9 @@ public class AnimalService {
 
     protected Page<AnimalModel> findAll(Pageable pageable){
         return animalRepository.findAll(pageable);
+    }
+
+    protected boolean existsByNomeAndProprietario(String nome, TropeiroModel proprietario){
+        return animalRepository.existsByNomeAndProprietario(nome, proprietario);
     }
 }

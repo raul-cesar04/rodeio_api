@@ -45,11 +45,11 @@ POST localhost:8080/v1/tropeiro
 Content-Type: application/json
 
 {
-  "nome": "José Thiago",
-  "sigla": "JTP",
+  "nome": "Trem Que Pula",
+  "sigla": "TQP",
   "boiada": [
     {
-      "nome": "Despacho"
+      "nome": "Bandoleiro"
     }
   ]
 }
@@ -68,3 +68,22 @@ Content-Type: application/json
 
 ### DELETE
 DELETE localhost:8080/v1/tropeiro/203
+
+## Animais
+
+### LISTA
+GET localhost:8080/v1/animal
+
+### BUSCA
+GET localhost:8080/v1/animal/2
+
+### CRIA
+POST localhost:8080/v1/animal
+Content-Type: application/json
+
+{
+  "nome": "Resgate",
+  "proprietario": {
+    "id": 252
+  }
+}
