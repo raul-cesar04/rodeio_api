@@ -14,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -95,8 +94,7 @@ public class AnimalController {
 
     private EntityModel<AnimalModel> animalModelToEntityModel(AnimalModel animalModel){
         Pageable pageable = PageRequest.of(0, 10);
-        EntityModel<AnimalModel> animalModelEntityModel = animalRepresentationModelAssembler.toModel(animalModel)
-                .add(linkTo(methodOn(AnimalController.class).listAnimals(pageable)).withRel("animais"));
+        EntityModel<AnimalModel> animalModelEntityModel = animalRepresentationModelAssembler.toModel(animalModel);
         return animalModelEntityModel;
     }
 }

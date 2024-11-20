@@ -105,9 +105,7 @@ public class TropeiroController {
 
     private EntityModel<TropeiroModel> tropeiroModelToEntityModel(TropeiroModel tropeiroModel){
         Pageable pageable = PageRequest.of(0, 10);
-        EntityModel<TropeiroModel> tropeiroModelEntityModel = tropeiroRepresentationModelAssembler.toModel(tropeiroModel)
-                .add(linkTo(methodOn(TropeiroController.class).listTropeiros(pageable)).withRel("tropeiros"));
-
+        EntityModel<TropeiroModel> tropeiroModelEntityModel = tropeiroRepresentationModelAssembler.toModel(tropeiroModel);
         return tropeiroModelEntityModel;
     }
 }

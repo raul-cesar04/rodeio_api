@@ -17,18 +17,18 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class AnimalRepresentationModelAssembler implements SimpleRepresentationModelAssembler<AnimalModel> {
     @Override
     public void addLinks(EntityModel<AnimalModel> resource) {
+        Pageable pageable = PageRequest.of(0, 10);
         Long id = resource.getContent().getId();
         Long tropeiroId = resource.getContent().getProprietario().getId();
 
         resource.add(linkTo(methodOn(AnimalController.class).getAnimal(id)).withSelfRel());
         resource.add(linkTo(methodOn(TropeiroController.class).getTropeiro(tropeiroId)).withRel("proprietario"));
+        resource.add(linkTo(methodOn(AnimalController.class).listAnimals(pageable)).withRel("animais"));
+        resource.add(linkTo(methodOn(TropeiroController.class).listTropeiros(pageable)).withRel("tropeiros"));
     }
 
     @Override
     public void addLinks(CollectionModel<EntityModel<AnimalModel>> resources) {
-        Pageable pageable = PageRequest.of(0, 10);
-
-        resources.add(linkTo(methodOn(AnimalController.class).listAnimals(pageable)).withRel("animais"));
-        resources.add(linkTo(methodOn(TropeiroController.class).listTropeiros(pageable)).withRel("tropeiros"));
+        resources.forEach(this::addLinks);
     }
 }

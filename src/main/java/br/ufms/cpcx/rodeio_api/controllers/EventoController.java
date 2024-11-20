@@ -29,12 +29,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class EventoController {
     private final RodeioApiServiceFacade rodeioApiServiceFacade;
     private final EventoRepresentationModelAssembler eventoRepresentationModelAssembler;
-    private final EventoService eventoService;
 
-    public EventoController(RodeioApiServiceFacade rodeioApiServiceFacade, EventoRepresentationModelAssembler eventoRepresentationModelAssembler, EventoService eventoService) {
+    public EventoController(RodeioApiServiceFacade rodeioApiServiceFacade, EventoRepresentationModelAssembler eventoRepresentationModelAssembler) {
         this.rodeioApiServiceFacade = rodeioApiServiceFacade;
         this.eventoRepresentationModelAssembler = eventoRepresentationModelAssembler;
-        this.eventoService = eventoService;
     }
 
     @GetMapping()
@@ -85,9 +83,7 @@ public class EventoController {
         return ResponseEntity.status(HttpStatus.OK).body(eventoModelToEntityModel(eventoModel));
     }
     private EntityModel<EventoModel> eventoModelToEntityModel(EventoModel eventoModel) {
-        Pageable pageable = PageRequest.of(0, 10);
-        EntityModel<EventoModel> eventoModelEntityModel = eventoRepresentationModelAssembler.toModel(eventoModel)
-                .add(linkTo(methodOn(EventoController.class).listEventos(pageable)).withRel("eventos"));
+        EntityModel<EventoModel> eventoModelEntityModel = eventoRepresentationModelAssembler.toModel(eventoModel);
 
         return eventoModelEntityModel;
     }

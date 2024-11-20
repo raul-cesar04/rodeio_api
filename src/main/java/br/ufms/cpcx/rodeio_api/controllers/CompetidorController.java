@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -28,19 +29,17 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class CompetidorController {
     private final RodeioApiServiceFacade rodeioApiServiceFacade;
     private final CompetidorRepresentationModelAssembler competidorRepresentationModelAssembler;
-    private final PagedResourcesAssembler pagedResourcesAssembler;
 
-    public CompetidorController(RodeioApiServiceFacade rodeioApiServiceFacade, CompetidorRepresentationModelAssembler competidorRepresentationModelAssembler, PagedResourcesAssembler pagedResourcesAssembler) {
+    public CompetidorController(RodeioApiServiceFacade rodeioApiServiceFacade, CompetidorRepresentationModelAssembler competidorRepresentationModelAssembler) {
         this.rodeioApiServiceFacade = rodeioApiServiceFacade;
         this.competidorRepresentationModelAssembler = competidorRepresentationModelAssembler;
-        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @PostMapping()
     public ResponseEntity<EntityModel<CompetidorModel>> createCompetidor(@RequestBody @Valid CompetidorDTO competidorDTO){
         CompetidorModel competidorModel = new CompetidorModel();
         BeanUtils.copyProperties(competidorDTO, competidorModel);
-
+        competidorModel.setEventos(new ArrayList<>());
         return ResponseEntity.status(HttpStatus.CREATED).body(competidorModelToEntityModel(rodeioApiServiceFacade.createCompetidor(competidorModel)));
     }
 
@@ -88,8 +87,7 @@ public class CompetidorController {
 
     private EntityModel<CompetidorModel> competidorModelToEntityModel(CompetidorModel competidorModel){
         Pageable pageable = PageRequest.of(0, 10);
-        EntityModel<CompetidorModel> competidorModelEntityModel = competidorRepresentationModelAssembler.toModel(competidorModel)
-                .add(linkTo(methodOn(CompetidorController.class).listCompetidores(pageable)).withRel("competidores"));
+        EntityModel<CompetidorModel> competidorModelEntityModel = competidorRepresentationModelAssembler.toModel(competidorModel);
         return competidorModelEntityModel;
     }
 }
