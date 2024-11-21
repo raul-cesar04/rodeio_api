@@ -84,6 +84,7 @@ public class TropeiroController {
         TropeiroModel tropeiroModel = new TropeiroModel();
         BeanUtils.copyProperties(tropeiroDTO, tropeiroModel);
         tropeiroModel.setId(tropeiroModelOptional.get().getId());
+        tropeiroModel.setBoiada(new ArrayList<>());
 
         return ResponseEntity.status(HttpStatus.OK).body(tropeiroModelToEntityModel(rodeioApiServiceFacade.createTropeiro(tropeiroModel)));
     }

@@ -1,129 +1,130 @@
 ## COMPETIDORES
-### CREATE
+### CRIAR COMPETIDOR
 POST localhost:8080/v1/competidor
 Content-Type: application/json
 
 {
+  "nome": "Ednei Caminhas",
+  "idade": 28,
+  "cidadeNatal": {
+    "cidade": "Indaiatuba",
+    "estado": "SP"
+  }
+}
+
+### LISTAR COMPETIDORES
+GET localhost:8080/v1/competidor
+
+### BUSCAR COMPETIDOR POR ID
+GET localhost:8080/v1/competidor/361
+
+### ATUALIZAR COMPETIDOR POR ID
+PUT localhost:8080/v1/competidor/361
+Content-Type: application/json
+
+{
   "nome": "André Moraes",
-  "idade": 27,
+  "idade": 28,
   "cidadeNatal": {
     "cidade": "Agudos",
     "estado": "SP"
   }
 }
 
-### LIST
-GET localhost:8080/v1/competidor
 
-### PROCURA
-GET localhost:8080/v1/competidor/203
-
-### ATUALIZA
-PUT localhost:8080/v1/competidor/152
-Content-Type: application/json
-
-{
-  "nome": "Robson Palermo",
-  "idade": 22,
-  "cidadeNatal": {
-    "cidade": "Rio Branco",
-    "estado": "AC"
-  }
-}
-
-
-### DELETE
-DELETE localhost:8080/v1/competidor/203
+### EXCLUIR COMPETIDOR POR ID
+DELETE localhost:8080/v1/competidor/361
 
 ## TROPEIROS
 
-### LIST
-GET localhost:8080/v1/tropeiro
-
-### CREATE
+### CRIAR TROPEIRO
 POST localhost:8080/v1/tropeiro
 Content-Type: application/json
 
 {
-  "nome": "Paulo Emilio",
-  "sigla": "PE",
+  "nome": "Renato Pires",
+  "sigla": "RP",
   "boiada": [
     {
-      "nome": "Europeu",
-      "ladoBrete": "CERTO"
+      "nome": "PROTEGIDO",
+      "ladoBrete": "ERRADO"
     }
   ]
 }
 
-### BUSCA
-GET localhost:8080/v1/tropeiro/152
+### LISTAR TROPEIROS
+GET localhost:8080/v1/tropeiro
 
-### ATUALIZA
-PUT localhost:8080/v1/tropeiro/2
+
+### BUSCAR TROPEIRO POR ID
+GET localhost:8080/v1/tropeiro/502
+
+### ATUALIZAR TROPEIRO POR ID
+PUT localhost:8080/v1/tropeiro/402
 Content-Type: application/json
 
 {
-  "nome": "Neto Oger BRAHMA",
-  "sigla": "NO"
+  "nome": "Trem Que Pula",
+  "sigla": "TQP"
 }
 
-### DELETE
-DELETE localhost:8080/v1/tropeiro/203
+### EXCLUIR TROPEIRO POR ID
+DELETE localhost:8080/v1/tropeiro/502
 
 ## Animais
-
-### LISTA
-GET localhost:8080/v1/animal
-
-### BUSCA
-GET localhost:8080/v1/animal/2
-
-### CRIA
+### CRIAR ANIMAL
 POST localhost:8080/v1/animal
 Content-Type: application/json
 
 {
-  "nome": "Estradeiro",
-  "ladoBrete": "CERTO",
+  "nome": "Pouso Forçado",
+  "ladoBrete": "ERRADO",
   "proprietario": {
-    "id": 403
+    "id": 402
   }
 }
 
-### Atualiza
-PUT localhost:8080/v1/animal/154
+### LISTAR ANIMAIS
+GET localhost:8080/v1/animal
+
+### BUSCAR ANIMAL POR ID
+GET localhost:8080/v1/animal/403
+
+
+### ATUALIZAR ANIMAL POR ID
+PUT localhost:8080/v1/animal/302
 Content-Type: application/json
 
 {
-  "nome": "Bandoleiro",
+  "nome": "Bandolero",
   "ladoBrete": "CERTO"
 }
 
-### DELETE
-DELETE localhost:8080/v1/animal/204
+### EXCLUIR ANIMAL POR ID
+DELETE localhost:8080/v1/animal/403
 
 ## EVENTOS
-
-### LISTAR
-GET localhost:8080/v1/evento
-
-### BUSCAR
-GET localhost:8080/v1/evento/1
-
-### CRIAR
+### CRIAR EVENTO
 POST localhost:8080/v1/evento
 Content-Type: application/json
 
 {
-  "titulo": "Barretos International Rodeo 2004",
+  "titulo": "Fepeina 2024",
   "localizacao": {
-    "cidade": "Barretos",
-    "estado": "SP"
+    "cidade": "Douradina",
+    "estado": "PR"
   }
 }
 
-### Atualiza
-PUT localhost:8080/v1/evento/52
+### LISTAR EVENTOS
+GET localhost:8080/v1/evento
+
+### BUSCAR EVENTO POR ID
+GET localhost:8080/v1/evento/152
+
+
+### ATUALIZAR EVENTO POR ID
+PUT localhost:8080/v1/evento/152
 Content-Type: application/json
 
 {
@@ -134,14 +135,20 @@ Content-Type: application/json
   }
 }
 
-### Deleta
-DELETE localhost:8080/v1/evento/52
+### EXCLUIR EVENTO POR ID
+DELETE localhost:8080/v1/evento/152
 
 ## Inscrição Competidor Evento
-### CRIA
-POST localhost:8080/v1/competidor/361/evento
+### CRIAR INSCRIÇÃO
+POST localhost:8080/v1/competidor/402/evento
 Content-Type: application/json
 
 {
   "id": 102
 }
+
+### LISTAR INSCRIÇÕES POR ID DE COMPETIDOR
+GET localhost:8080/v1/competidor/402/evento
+
+### EXCLUIR INSCRIÇÃO POR ID
+DELETE localhost:8080/v1/competidor/402/evento/102

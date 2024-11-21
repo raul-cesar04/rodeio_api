@@ -21,11 +21,9 @@ import java.util.Optional;
 @RequestMapping("/v1/competidor")
 public class EventoCompetidorInscricaoController {
     private final RodeioApiServiceFacade rodeioApiServiceFacade;
-    private final EventoCompetidorInscricaoService eventoCompetidorInscricaoService;
 
-    public EventoCompetidorInscricaoController(RodeioApiServiceFacade rodeioApiServiceFacade, EventoCompetidorInscricaoService eventoCompetidorInscricaoService) {
+    public EventoCompetidorInscricaoController(RodeioApiServiceFacade rodeioApiServiceFacade) {
         this.rodeioApiServiceFacade = rodeioApiServiceFacade;
-        this.eventoCompetidorInscricaoService = eventoCompetidorInscricaoService;
     }
 
     @GetMapping("/{id}/evento")
@@ -62,5 +60,29 @@ public class EventoCompetidorInscricaoController {
         eventoCompetidorInscricaoModel.setEvento(eventoModelOptional.get());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(rodeioApiServiceFacade.createEventoCompetidorInscricao(eventoCompetidorInscricaoModel));
+    }
+
+    @DeleteMapping("/{id}/evento/{eventoId}")
+    public ResponseEntity<Object> deleteInscricao(@PathVariable Long id, @PathVariable Long eventoId){
+        Optional<EventoModel> eventoModelOptional = rodeioApiServiceFacade.getEvento(eventoId);
+
+        if(eventoModelOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento "+eventoId+" não encontrado.");
+        }
+
+        Optional<CompetidorModel> competidorModelOptional = rodeioApiServiceFacade.getCompetidorById(id);
+        if(competidorModelOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Competidor "+id+" não encontrado.");
+        }
+
+        Optional<EventoCompetidorInscricaoModel> incricaoOptional = rodeioApiServiceFacade.findEventoCompetidorInscricaoByCompetidorAndEvento(competidorModelOptional.get(), eventoModelOptional.get());
+
+        if(incricaoOptional.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhuma inscrição do competidor "+id+" no evento "+eventoId+" encontrada.");
+        }
+
+        rodeioApiServiceFacade.deleteEventoCompetidorInscricao(incricaoOptional.get());
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

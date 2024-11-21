@@ -24,6 +24,10 @@ public class TropeiroService {
     protected TropeiroModel save(TropeiroModel tropeiroModel){
         TropeiroModel savedTropeiroModel = tropeiroRepository.save(tropeiroModel);
 
+        if(tropeiroModel.getBoiada().isEmpty()){
+            return savedTropeiroModel;
+        }
+
         for(AnimalModel animalModel:tropeiroModel.getBoiada()){
             animalModel.setProprietario(savedTropeiroModel);
             animalService.save(animalModel);
