@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 public class EventoDTO {
+    private Long id;
     @NotBlank
     @Size(max = 100)
     private String titulo;

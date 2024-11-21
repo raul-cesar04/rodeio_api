@@ -8,4 +8,5 @@ import lombok.Setter;
 public class EventoCompetidorInscricaoDTO {
     private CompetidorDTO competidor;
     private EventoDTO evento;
+    private Float pontuacao;
 }

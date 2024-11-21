@@ -34,4 +34,6 @@ public class EventoCompetidorInscricaoModel implements Serializable {
     @JoinColumn(name = "evento", nullable = false, foreignKey = @ForeignKey(name = "FK_EVENTO"))
     private EventoModel evento;
 
+    @Column(nullable = false)
+    private float pontuacao;
 }

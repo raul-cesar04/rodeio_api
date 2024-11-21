@@ -4,11 +4,11 @@ POST localhost:8080/v1/competidor
 Content-Type: application/json
 
 {
-  "nome": "Anderson de Oliveira",
-  "idade": 38,
+  "nome": "André Moraes",
+  "idade": 27,
   "cidadeNatal": {
-    "cidade": "Mundo Novo",
-    "estado": "MS"
+    "cidade": "Agudos",
+    "estado": "SP"
   }
 }
 
@@ -23,11 +23,11 @@ PUT localhost:8080/v1/competidor/152
 Content-Type: application/json
 
 {
-  "nome": "Rafael Wermond",
-  "idade": 23,
+  "nome": "Robson Palermo",
+  "idade": 22,
   "cidadeNatal": {
-    "cidade": "Tangará da Serra",
-    "estado": "MT"
+    "cidade": "Rio Branco",
+    "estado": "AC"
   }
 }
 
@@ -45,12 +45,12 @@ POST localhost:8080/v1/tropeiro
 Content-Type: application/json
 
 {
-  "nome": "São Salomão",
-  "sigla": "SSO",
+  "nome": "Paulo Emilio",
+  "sigla": "PE",
   "boiada": [
     {
-      "nome": "Tinga",
-      "ladoBrete": "ERRADO"
+      "nome": "Europeu",
+      "ladoBrete": "CERTO"
     }
   ]
 }
@@ -83,10 +83,10 @@ POST localhost:8080/v1/animal
 Content-Type: application/json
 
 {
-  "nome": "Taça",
-  "ladoBrete": "ERRADO",
+  "nome": "Estradeiro",
+  "ladoBrete": "CERTO",
   "proprietario": {
-    "id": 202
+    "id": 403
   }
 }
 
@@ -115,10 +115,10 @@ POST localhost:8080/v1/evento
 Content-Type: application/json
 
 {
-  "titulo": "Fepeina 2024",
+  "titulo": "Barretos International Rodeo 2004",
   "localizacao": {
-    "cidade": "Douradina",
-    "estado": "PR"
+    "cidade": "Barretos",
+    "estado": "SP"
   }
 }
 
@@ -136,3 +136,12 @@ Content-Type: application/json
 
 ### Deleta
 DELETE localhost:8080/v1/evento/52
+
+## Inscrição Competidor Evento
+### CRIA
+POST localhost:8080/v1/competidor/361/evento
+Content-Type: application/json
+
+{
+  "id": 102
+}

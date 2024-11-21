@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 public class CompetidorDTO {
+    private Long id;
     @NotBlank
     @Size(max=100)
     private String nome;

@@ -1,10 +1,7 @@
 package br.ufms.cpcx.rodeio_api.services;
 
 import br.ufms.cpcx.rodeio_api.dtos.LocalizacaoDTO;
-import br.ufms.cpcx.rodeio_api.models.AnimalModel;
-import br.ufms.cpcx.rodeio_api.models.CompetidorModel;
-import br.ufms.cpcx.rodeio_api.models.EventoModel;
-import br.ufms.cpcx.rodeio_api.models.TropeiroModel;
+import br.ufms.cpcx.rodeio_api.models.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,13 +13,14 @@ public class RodeioApiServiceFacade {
     private final CompetidorService competidorService;
     private final TropeiroService tropeiroService;
     private final EventoService eventoService;
-
+    private final EventoCompetidorInscricaoService eventoCompetidorInscricaoService;
     private final AnimalService animalService;
 
-    public RodeioApiServiceFacade(CompetidorService ccompetidorService, TropeiroService tropeiroService, EventoService eventoService, AnimalService animalService) {
+    public RodeioApiServiceFacade(CompetidorService ccompetidorService, TropeiroService tropeiroService, EventoService eventoService, EventoCompetidorInscricaoService eventoCompetidorInscricaoService, AnimalService animalService) {
         this.competidorService = ccompetidorService;
         this.tropeiroService = tropeiroService;
         this.eventoService = eventoService;
+        this.eventoCompetidorInscricaoService = eventoCompetidorInscricaoService;
         this.animalService = animalService;
     }
 
@@ -119,5 +117,22 @@ public class RodeioApiServiceFacade {
 
     public boolean eventoExistsByTituloAndLocalizacao(String titulo, LocalizacaoDTO localizacao) {
         return this.eventoService.existsByTituloAndLocalizacao(titulo, localizacao);
+    }
+
+    /* INSCRICAO COMPETIDORES */
+    public Optional<EventoCompetidorInscricaoModel> getEventoCompetidorInscricao(Long id){
+        return this.eventoCompetidorInscricaoService.findById(id);
+    }
+
+    public EventoCompetidorInscricaoModel createEventoCompetidorInscricao(EventoCompetidorInscricaoModel eventoCompetidorInscricaoModel){
+        return this.eventoCompetidorInscricaoService.save(eventoCompetidorInscricaoModel);
+    }
+
+    public Optional<EventoCompetidorInscricaoModel> findEventoCompetidorInscricaoByCompetidorAndEvento(CompetidorModel competidorModel, EventoModel eventoModel){
+        return this.eventoCompetidorInscricaoService.findByCompetidorAndEvento(competidorModel, eventoModel);
+    }
+
+    public void deleteEventoCompetidorInscricao(EventoCompetidorInscricaoModel eventoCompetidorInscricaoModel) {
+        this.eventoCompetidorInscricaoService.delete(eventoCompetidorInscricaoModel);
     }
 }
