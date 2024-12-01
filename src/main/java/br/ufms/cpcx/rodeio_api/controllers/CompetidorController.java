@@ -48,10 +48,16 @@ public class CompetidorController {
        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.getCompetidores(pageable).map(this::competidorModelToEntityModel));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Object> searchCompetidores(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam String nome){
+        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.getCompetidoresByNome(pageable, nome));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<EntityModel<CompetidorModel>> getCompetidor(@PathVariable Long id) {
         return rodeioApiServiceFacade.getCompetidorById(id).map(this::competidorLinkCallback).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Competidor "+id+" não encontrado."));
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<EntityModel<CompetidorModel>> updateCompetidor(@PathVariable Long id, @RequestBody @Valid CompetidorDTO competidorDTO) {

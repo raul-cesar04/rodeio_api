@@ -2,6 +2,8 @@ package br.ufms.cpcx.rodeio_api.services;
 
 import br.ufms.cpcx.rodeio_api.models.CompetidorModel;
 import br.ufms.cpcx.rodeio_api.repositories.CompetidorRepository;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,18 @@ class CompetidorService {
 
     protected Optional<CompetidorModel> findById(Long id){
        return competidorRepository.findById(id);
+    }
+
+    protected Page<CompetidorModel> findByName(Pageable pageable, String name){
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withMatcher("nome", matcher->matcher.contains())
+                .withIgnoreCase()
+                .withIgnoreNullValues();
+
+        CompetidorModel competidorModel = new CompetidorModel();
+        competidorModel.setNome(name);
+        var example = Example.of(competidorModel, exampleMatcher);
+
+        return competidorRepository.findAll(example, pageable);
     }
 }

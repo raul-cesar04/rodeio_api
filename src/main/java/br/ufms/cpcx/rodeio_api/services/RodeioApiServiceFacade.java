@@ -43,6 +43,9 @@ public class RodeioApiServiceFacade {
         this.competidorService.delete(competidorModel);
     }
 
+    public Page<CompetidorModel> getCompetidoresByNome(Pageable pageable, String nome){
+        return this.competidorService.findByName(pageable, nome);
+    }
 
     /**
      * TROPEIROS
