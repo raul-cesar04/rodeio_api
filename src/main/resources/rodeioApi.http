@@ -42,11 +42,11 @@ POST localhost:8080/v1/tropeiro
 Content-Type: application/json
 
 {
-  "nome": "Renato Pires",
-  "sigla": "RP",
+  "nome": "Tomateiro",
+  "sigla": "TOM",
   "boiada": [
     {
-      "nome": "PROTEGIDO",
+      "nome": "Copo de Leite",
       "ladoBrete": "ERRADO"
     }
   ]
@@ -109,9 +109,9 @@ POST localhost:8080/v1/evento
 Content-Type: application/json
 
 {
-  "titulo": "Fepeina 2024",
+  "titulo": "Apucarana 2004",
   "localizacao": {
-    "cidade": "Douradina",
+    "cidade": "Apucarana",
     "estado": "PR"
   }
 }

@@ -40,6 +40,11 @@ public class AnimalController {
         return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.getAnimais(pageable).map(this::animalModelToEntityModel));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Page<EntityModel<AnimalModel>>> searchAnimal(Pageable pageable, @RequestParam String nome){
+        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.findAnimalByNome(pageable, nome).map(this::animalModelToEntityModel));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<EntityModel<AnimalModel>> getAnimal(@PathVariable Long id) {
         return rodeioApiServiceFacade.getAnimal(id).map(this::competidorLinkCallback).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal "+id+" não encontrado."));

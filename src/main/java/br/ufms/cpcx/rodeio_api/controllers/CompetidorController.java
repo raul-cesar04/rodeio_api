@@ -50,7 +50,7 @@ public class CompetidorController {
 
     @GetMapping("/search")
     public ResponseEntity<Object> searchCompetidores(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam String nome){
-        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.getCompetidoresByNome(pageable, nome));
+        return ResponseEntity.status(HttpStatus.OK).body(rodeioApiServiceFacade.getCompetidoresByNome(pageable, nome).map(this::competidorModelToEntityModel));
     }
 
     @GetMapping("/{id}")

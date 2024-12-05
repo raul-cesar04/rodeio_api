@@ -38,7 +38,7 @@ class CompetidorService {
 
     protected Page<CompetidorModel> findByName(Pageable pageable, String name){
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withMatcher("nome", matcher->matcher.contains())
+                .withMatcher("nome", matcher->matcher.startsWith())
                 .withIgnoreCase()
                 .withIgnoreNullValues();
 

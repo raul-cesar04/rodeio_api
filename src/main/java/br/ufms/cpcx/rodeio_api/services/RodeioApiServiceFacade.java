@@ -100,6 +100,9 @@ public class RodeioApiServiceFacade {
         return this.animalService.existsByNomeAndProprietario(nome, tropeiroModel);
     }
 
+    public Page<AnimalModel> findAnimalByNome(Pageable pageable, String nome){
+        return this.animalService.findByName(pageable, nome);
+    }
     /* EVENTOS */
 
     public Optional<EventoModel> getEvento(Long id) {
